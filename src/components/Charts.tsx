@@ -33,7 +33,7 @@ export default class Charts extends React.Component{
         for (let num = 30; num >= 0; num--) {
             this.dataAPR.push({
                 date: subDays(new Date(), num).toISOString().substr(0, 10),
-                value: (Math.random() + 1) + 0.05 * Math.random(),
+                value: ((Math.random() + 1) + 0.05 * Math.random()).toFixed(2),
             });
         }
 
@@ -114,7 +114,9 @@ export default class Charts extends React.Component{
                                 return date.toLocaleDateString('en-us', { month:"short", day:"numeric"})
                             }}
                         />
-                        <YAxis dataKey="value"/>
+                        <YAxis dataKey="value"
+                               tickFormatter={(number) => `${number.toFixed(2)}`}
+                        />
                         <Tooltip />
                         <Area connectNulls type="monotone" dataKey="value" stroke="#3c1361" fill="#011f4b"/>
 
