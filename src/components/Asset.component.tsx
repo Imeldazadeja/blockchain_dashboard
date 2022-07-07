@@ -10,7 +10,6 @@ export default class Asset extends React.Component {
 
     componentDidMount() {
         getAllAssets().then(response => {
-            console.log(response);
             const assetData = response.data.map((item: any) => ({asset: item.asset, assetId: item.assetId}))
             this.setState({assetId: assetData.map((item: any) => item.assetId), asset: assetData.map((item: any) => item.asset)})
         })
@@ -19,17 +18,19 @@ export default class Asset extends React.Component {
 
 
     render() {
+        // Render data, assets and assetIds
             return (
-                <ul>
-                    <p>List of assets</p>
+                <div style={{background: "aliceblue", margin: '10px',}}>
+                    <p style={{fontSize: '20px'}}>List of assets</p>
                     {this.state.asset.map(asset => (
-                        <li>{asset}</li>
+                        <span>{`${asset}, `}</span>
                     ))}
-                    <p>List of assetIds</p>
+
+                    <p style={{fontSize: '20px'}}>List of assetIds</p>
                     {this.state.assetId.map(assetId => (
-                        <li>{assetId}</li>
+                        <span>{`${assetId}, `}</span>
                     ))}
-                </ul>
+                </div>
             );
         }
 }
